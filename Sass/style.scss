@@ -1,0 +1,455 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Poppins&display=swap");
+
+// import file to media cwery
+@import "_breakpoints.scss";
+
+// import create Custom-Scrollbars-&-Selection-color
+@import "_Custom-Scrollbars-&-Selection-color.scss";
+
+// import containerScreen
+@import "_containerScreen.scss";
+/*! start variables*/
+
+$colorNormal: #ffffff;
+$bg-heade-linding: #ebfbff;
+$colorGlobal: #ff52bf;
+$bgFooter: #00252e;
+$colorHeading: #333;
+$colorSubheading: #808d99;
+$transitionTime: 1.2s;
+
+/*! end variables*/
+/*! start Global Rules*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+%button {
+  cursor: pointer;
+  transition: $transitionTime;
+  &:hover {
+    transition: $transitionTime;
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+%Global_button {
+  padding: 15px 40px;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 8px 12px 1px #dbdbdb;
+  background-color: $colorGlobal;
+  color: $colorNormal;
+  font: {
+    size: 14px;
+    weight: 700;
+    family: "Open Sans";
+  }
+}
+.container_card {
+  // width: 500px;
+  padding: 40px;
+  margin: 40px auto;
+  box-shadow: 0 0 8px -4px $colorSubheading;
+  border-radius: 10px;
+  .card_content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+    overflow: hidden;
+    .image_card {
+      img {
+        width: 300px;
+        max-width: 1200px;
+      }
+    }
+    .text_card {
+      width: 525px;
+      p:first-child {
+        font: {
+          size: 25px;
+          weight: 700;
+          family: "Poppins";
+        }
+      }
+      p:last-child {
+        color: $colorSubheading;
+        font: {
+          size: 18px;
+          weight: 400;
+          family: "Open Sans";
+        }
+      }
+    }
+  }
+  .flowing_content {
+    display: flex;
+    flex-direction: row;
+    @include media("<=tablet") {
+      flex-direction: column;
+    }
+  }
+  @include media("<=tablet") {
+    .card_content {
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+      p:first-child {
+        margin-top: 50px;
+      }
+    }
+  }
+  @include media("<=576px") {
+    width: 350px;
+    .card_content {
+      .image_card {
+        img {
+          width: 200px;
+        }
+      }
+      .text_card {
+        p:first-child {
+          font: {
+            size: 20px;
+          }
+        }
+        p:last-child {
+          display: inline-flex;
+          width: 290px;
+          font: {
+            size: 14px;
+          }
+        }
+      }
+    }
+  }
+  @include media("<=phone") {
+    width: 250px;
+  }
+}
+/*! end Global Rules*/
+/*! start header-and-linding*/
+.header-and-linding {
+  margin-bottom: 200px;
+  background: {
+    image: url(../images/bg-hero-desktop.svg);
+    color: $bg-heade-linding;
+    repeat: no-repeat;
+    position: center;
+    size: cover;
+  }
+  @include media("<=tablet") {
+    background-image: url(../images/bg-hero-mobile.svg);
+  }
+}
+/*! end header-and-linding*/
+/*! start header*/
+.header_content {
+  padding: 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .logo {
+    img {
+      width: 200px;
+    }
+  }
+  .button {
+    button {
+      @extend %button;
+      border: none;
+      border-radius: 50px;
+      padding: 15px 40px;
+      background-color: $colorNormal;
+      box-shadow: 0 0 8px -4px $colorSubheading;
+      font: {
+        size: 14px;
+        weight: 700;
+      }
+    }
+  }
+  @include media("<=420px") {
+    .logo {
+      img {
+        width: 150px;
+      }
+    }
+    .button {
+      button {
+        padding: 10px 15px;
+      }
+    }
+  }
+}
+/*! end header*/
+/*! start landing*/
+.landing_content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  padding-bottom: 40px;
+  .mockups {
+    img {
+      max-width: 1200px;
+      width: 100%;
+    }
+  }
+  .landing_text {
+    p:first-child {
+      margin: 30px 0;
+      width: 500px;
+      font: {
+        size: 40px;
+        weight: 700;
+        family: "Poppins";
+      }
+    }
+    p:nth-child(2) {
+      margin: 20px 0;
+      width: 560px;
+      font: {
+        size: 18px;
+        weight: 400;
+        family: "Open Sans";
+      }
+    }
+    .Global_button {
+      @extend %Global_button;
+      @extend %button;
+    }
+  }
+  @include media("<=tablet") {
+    flex-direction: column-reverse;
+    .mockups {
+      img {
+        width: 400px;
+        margin-top: 20px;
+        @include media("<=420px") {
+          width: 270px;
+        }
+      }
+    }
+    .landing_text {
+      text-align: center;
+      p:first-child {
+        width: 340px;
+        font: {
+          size: 30px;
+        }
+      }
+      p:nth-child(2) {
+        width: 340px;
+      }
+      @include media("<=420px") {
+        p:first-child {
+          width: 280px;
+          font: {
+            size: 25px;
+          }
+        }
+        p:nth-child(2) {
+          width: 280px;
+          font: {
+            size: 14px;
+          }
+        }
+      }
+    }
+  }
+  // button:last-child style in Global Rules
+}
+/*! end landing*/
+/*! start footer*/
+.footer {
+  background-color: $bgFooter;
+  color: $colorNormal;
+  padding: 120px 0 40px 0;
+  margin-top: 200px;
+  position: relative;
+  .footer_content {
+    display: block;
+    .community {
+      text-align: center;
+      padding: 40px;
+      margin: auto;
+      width: 40%;
+      border-radius: 10px;
+      background-color: $colorNormal;
+      color: $colorHeading;
+      font: {
+        size: 20px;
+        weight: 700;
+        family: "Poppins";
+      }
+      position: absolute;
+      top: 0%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 8px 12px 0px $colorHeading;
+      p {
+        padding-bottom: 20px;
+      }
+      @include media("<=tablet") {
+        width: 80%;
+      }
+      .Global_button {
+        @extend %Global_button;
+        @extend %button;
+      }
+    }
+    .logo_footer {
+      img {
+        width: max-content;
+        padding-bottom: 40px;
+        @include media("<=tablet") {
+          padding-top: 50px;
+          text-align: center;
+        }
+      }
+    }
+    .contact {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      ul {
+        li {
+          list-style-type: none;
+          padding: 10px 0;
+          transition: $transitionTime;
+          font: {
+            size: 14px;
+            weight: 400;
+            family: "Open Sans";
+          }
+          &:hover {
+            color: $colorGlobal;
+            transform: scale(1.05);
+            transition: $transitionTime;
+          }
+          &:hover::after {
+            font-family: "Font Awesome 6 Free";
+            font-weight: 600;
+            content: "\f0a9";
+            font-size: 14px;
+            padding-left: 10px;
+            // transition: $transitionTime;
+          }
+        }
+      }
+      ul:first-child {
+        p {
+          width: 390px;
+          padding: 10px 0;
+          display: flex;
+          align-items: flex-start;
+          @include media("<=992px") {
+            width: 210px;
+            font-size: 12px;
+          }
+        }
+        li {
+          display: flex;
+          align-items: center;
+        }
+        #location::before {
+          font-family: "Font Awesome 6 Free";
+          font-weight: 600;
+          content: "\f3c5";
+          font-size: 20px;
+          padding: 5px 10px;
+          -webkit-font-smoothing: antialiased;
+        }
+        #phone::before {
+          font-family: "Font Awesome 6 Free";
+          font-weight: 600;
+          content: "\f095";
+          font-size: 20px;
+          padding: 10px;
+        }
+        #envelope::before {
+          font-family: "Font Awesome 6 Free";
+          font-weight: 600;
+          content: "\f0e0";
+          font-size: 20px;
+          padding: 10px;
+        }
+      }
+      .footer_icon {
+        margin: 20px;
+        i {
+          padding: 10px;
+          margin: 0 10px;
+          border: 1px solid;
+          border-radius: 50%;
+          transition: $transitionTime;
+          &:hover {
+            color: $colorGlobal;
+            transform: scale(1.2);
+            transition: $transitionTime;
+          }
+        }
+        .icon_facebook {
+          padding: 10px 12px;
+        }
+      }
+      @include media("<=tablet") {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+      }
+    }
+    .copy {
+      display: flex;
+      justify-content: end;
+      margin: 20px auto;
+      font: {
+        size: 12px;
+        weight: 400;
+      }
+      @include media("<=400px") {
+        margin: 20px auto 40px;
+      }
+    }
+    /*! start Attribution */
+    .attribution {
+      position: absolute;
+      bottom: 0rem;
+      color: $bg-heade-linding;
+      padding: 20px 0;
+      text-align: center;
+      width: -webkit-fill-available;
+      a {
+        font-size: smaller;
+        text-decoration: none;
+        color: $colorGlobal;
+        text-transform: capitalize;
+        font-size: 12px;
+        white-space: nowrap;
+        &:hover::after {
+          font-family: "Font Awesome 6 Free";
+          font-weight: 600;
+          content: "\f0a9";
+          font-size: 14px;
+          padding: 0 8px;
+        }
+      }
+    }
+    /*! end Attribution */
+  }
+}
+/*! end footer*/

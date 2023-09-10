@@ -1,0 +1,184 @@
+   // respond is the name of your mixin
+
+   @mixin respond ($breakpoint) {
+
+    // $breakpoint is simply a variable that can have several values
+
+    @if $breakpoint==tablet {
+
+        // here `laptop` is the value of $breakpoint
+        // when call laptop, we mean the following piece of code        
+
+    @media only screen and (max-width: 600px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==mobile {
+    @media only screen and (max-width: 480px) {
+      @content;
+    }
+  }
+}
+
+
+
+
+.main {
+    background: red;
+  // normal styling code here
+
+  @include respond(tablet) {
+        background: green;
+        // responsive code for tablet viewport i.e. 600px
+    }
+
+  @include respond(mobile) {
+        background: blue;
+        // responsive code for mobile viewport i.e. 480px   
+    }
+}
+
+// ==============================================================
+
+
+$media: (
+sm: 640px,
+md: 768px,
+lg: 1024px,
+xl: 1280px,
+2xl: 1536px,
+3xl: 1920px,
+);
+
+@mixin md($breakpoint) {
+@each $breakpoints, $size in $media {
+    @if $breakpoint==$breakpoints {
+        @media screen and (min-width: $size) {
+            @content;
+        }
+    }
+}
+}
+
+// ========================================================
+
+@mixin for-size($size) {
+@if $size == phone-only {
+@media (max-width: 599px) { @content; }
+} @else if $size == tablet-portrait-up {
+@media (min-width: 600px) { @content; }
+} @else if $size == tablet-landscape-up {
+@media (min-width: 900px) { @content; }
+} @else if $size == desktop-up {
+@media (min-width: 1200px) { @content; }
+} @else if $size == big-desktop-up {
+@media (min-width: 1800px) { @content; }
+}
+}
+
+
+.header-title {  
+font-size: 2rem;  
+
+@include for-size(phone-only) {    
+  font-size: 1rem; 
+}
+
+// ===========================================================
+
+$breakpoints: (
+'small':  ( min-width:  767px ),
+'medium': ( min-width:  992px ),
+'large':  ( min-width: 1200px )
+) !default;
+
+/// Mixin to manage responsive breakpoints
+/// @author Kitty Giraudel
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints
+@mixin respond-to($breakpoint) {
+// If the key exists in the map
+@if map-has-key($breakpoints, $breakpoint) {
+// Prints a media query based on the value
+@media #{inspect(map-get($breakpoints, $breakpoint))} {
+  @content;
+}
+}
+
+// If the key doesn't exist in the map
+@else {
+@warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+    + "Available breakpoints are: #{map-keys($breakpoints)}.";
+}
+}
+
+Usage
+
+.selector {
+color: red;
+
+@include respond-to('small') {
+color: blue;
+}
+}
+Result
+
+.selector {
+color: red;
+}
+@media (min-width: 767px) {
+.selector {
+color: blue;
+}
+}
+
+// ======================================
+
+$breakpoints: (
+'small':  ( min-width:  767px ),
+'medium': ( min-width:  992px ),
+'large':  ( min-width: 1200px )
+) !default;
+
+/// Mixin to manage responsive breakpoints
+/// @author Kitty Giraudel
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints
+@mixin respond-to($breakpoint) {
+// If the key exists in the map
+@if map-has-key($breakpoints, $breakpoint) {
+// Prints a media query based on the value
+@media #{inspect(map-get($breakpoints, $breakpoint))} {
+  @content;
+}
+}
+
+// If the key doesn't exist in the map
+@else {
+@warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+    + "Available breakpoints are: #{map-keys($breakpoints)}.";
+}
+}
+
+Usage
+
+.selector {
+color: red;
+
+@include respond-to('small') {
+color: blue;
+}
+}
+
+Result
+
+.selector {
+color: red;
+}
+@media (min-width: 767px) {
+.selector {
+color: blue;
+}
+}
+// ============================================
